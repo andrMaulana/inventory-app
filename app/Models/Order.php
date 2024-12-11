@@ -14,4 +14,12 @@ class Order extends Model
      */
     protected $fillable = ['user_id', 'product_id', 'quantity', 'status'];
 
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function order() {
+        return $this->belongsTo(Product::class);
+    }
 }
