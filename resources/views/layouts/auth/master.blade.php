@@ -16,9 +16,9 @@
     <meta name="MobileOptimized" content="320" />
     <meta name="robots" content="noindex,nofollow,noarchive" />
     <link rel="icon" href="{{ asset('icon.png') }}" type="image/x-icon" />
-    <link rel="shortcut icon" href="{{ asset('icon.png') }}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset('asset/icon.png') }}" type="image/x-icon" />
     <!-- Tabler Core -->
-    <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('asset/dist/css/tabler.min.css') }}" rel="stylesheet" />
 </head>
 
 <body class="antialiased border-top-wide border-primary d-flex flex-column">
