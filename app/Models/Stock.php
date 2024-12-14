@@ -13,4 +13,12 @@ class Stock extends Model
      * fillable
      */
     protected $fillable = ['product_id', 'type', 'quantity'];
+
+    /**
+     * relation products
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
