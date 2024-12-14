@@ -13,4 +13,20 @@ class Order extends Model
      * fillable
      */
     protected $fillable = ['user_id', 'product_id', 'quantity', 'status'];
+
+    /**
+     * relation users
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * relation products
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
