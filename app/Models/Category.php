@@ -13,4 +13,12 @@ class Category extends Model
      * fillable
      */
     protected $fillable = ['name', 'slug', 'image'];
+
+		/**
+		*	relation products
+		*/
+        public function products()
+        {
+            return $this->hasMany(Product::class);
+        }
 }
