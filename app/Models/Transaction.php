@@ -13,4 +13,20 @@ class Transaction extends Model
      * fillable
      */
     protected $fillable = ['user_id', 'invoice'];
+
+     /**
+     * relation users
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * relation transaction details
+     */
+    public function details()
+    {
+        return $this->hasMany(TransactionDetail::class);
+    }
 }
