@@ -10,6 +10,7 @@ use App\Models\Supplier;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\TransactionDetail;
+// use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -68,13 +69,31 @@ class DashboardController extends Controller implements HasMiddleware
                 $query->havingRaw('SUM(CASE WHEN type = "in" THEN quantity WHEN type = "out" THEN -quantity ELSE 0 END) <= 10');
             })->paginate(10);
 
-        // count best products data
-        $bestProduct = TransactionDetail::query()
-            ->selectRaw('products.name, sum(transaction_details.quantity) as total')
-            ->join('products', 'products.id', '=', 'transaction_details.product_id')
-            ->groupBy('transaction_details.product_id')
-            ->orderBy('total', 'DESC')
-            ->limit(5)->get();
+        // // count best products data
+        // $bestProduct = TransactionDetail::query()
+        //     ->selectRaw('products.name, sum(transaction_details.quantity) as total')
+        //     ->join('products', 'products.id', '=', 'transaction_details.product_id')
+        //     ->groupBy('transaction_details.product_id')
+        //     ->orderBy('total', 'DESC')
+        //     ->limit(5)
+        //     ->get();
+
+        $bestProduct = TransactionDetail::select('products.name')
+        ->join('products', 'products.id', '=', 'transaction_details.product_id')
+        ->groupBy('products.name', 'transaction_details.product_id')
+        ->selectRaw('SUM(transaction_details.quantity) as total')
+        ->orderBy('total', 'DESC')
+        ->limit(5)
+        ->get();
+
+//     // count best products data
+// $bestProduct = TransactionDetail::query()
+// ->select('products.name', DB::raw('SUM(transaction_details.quantity) as total'))
+// ->join('products', 'products.id', '=', 'transaction_details.product_id')
+// ->groupBy('products.name', 'transaction_details.product_id')
+// ->orderBy('total', 'DESC')
+// ->limit(5)
+// ->get();
 
         $label = [];
         $total = [];
