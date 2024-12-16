@@ -18,6 +18,14 @@
                                 <td>{{ $i + $permissions->firstItem() }}</td>
                                 <td>{{ $permission->name }}</td>
                                 <td>
+                                    @can('permissions-delete')
+                                        <x-button
+                                            title="Hapus Data"
+                                            type="delete"
+                                            :id="$permission->id"
+                                            :url="route('apps.permissions.destroy', $permission->id)"
+                                        />
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
