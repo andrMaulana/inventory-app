@@ -18,6 +18,30 @@
                                 <td>{{ $i + $permissions->firstItem() }}</td>
                                 <td>{{ $permission->name }}</td>
                                 <td>
+                                    @can('permissions-update')
+                                        <x-button
+                                            title="Ubah Data"
+                                            type="modal"
+                                            :id="$permission->id"
+                                        />
+                                        <x-modal
+                                            title="Ubah Data"
+                                            :id="$permission->id"
+                                        >
+                                            <form action="{{ route('apps.permissions.update', $permission->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <x-input
+                                                    title="Nama Permission"
+                                                    name="name"
+                                                    type="text"
+                                                    placeholder="Masukan nama permission"
+                                                    :value="$permission->name"
+                                                />
+                                                <x-button title="Simpan" type="save"/>
+                                            </form>
+                                        </x-modal>
+                                    @endcan
                                     @can('permissions-delete')
                                         <x-button
                                             title="Hapus Data"
