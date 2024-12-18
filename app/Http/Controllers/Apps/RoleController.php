@@ -82,7 +82,7 @@ class RoleController extends Controller implements HasMiddleware
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Role $role)
     {
         // get all permissions data
         $permissions = Permission::select('id', 'name')->orderBy('name')->get();
