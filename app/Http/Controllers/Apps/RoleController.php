@@ -94,9 +94,22 @@ class RoleController extends Controller implements HasMiddleware
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        // validate request
+        $request->validate([
+            'name' => 'required|unique:roles,name,'. $role->id,
+            'permissions' => 'required',
+        ]);
+
+        // update role data
+        $role->update(['name' => $request->name]);
+
+        // sync role permissions
+        $role->syncPermissions($request->permissions);
+
+        // render view
+        return to_route('apps.roles.index')->with('toast_success', 'Data berhasil disimpan');
     }
 
     /**
