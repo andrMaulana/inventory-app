@@ -115,8 +115,12 @@ class RoleController extends Controller implements HasMiddleware
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Role $role)
     {
-        //
+        // delete role data
+        $role->delete();
+
+        // render view
+        return back()->with('toas_success', 'Data berhasil dihapus');
     }
 }
