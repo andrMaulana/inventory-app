@@ -44,7 +44,11 @@ class RoleController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        //
+        // get all permissions data
+        $permissions = Permission::select('id', 'name')->orderBy('name')->get();
+
+        // render view
+        return view('pages.apps.roles.create', compact('permissions'));
     }
 
     /**
