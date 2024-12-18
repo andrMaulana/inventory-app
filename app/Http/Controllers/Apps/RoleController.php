@@ -30,7 +30,13 @@ class RoleController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        //
+        // get all role data with paginate
+        $roles = Role::when(request()->search, function($search){
+            $search = $search->where('name', 'like', '%'. request()->search. '%');
+        })->paginate(10);
+
+        // render view
+        return view('pages.apps.roles.index', compact('roles'));
     }
 
     /**
