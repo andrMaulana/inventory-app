@@ -56,7 +56,19 @@ class RoleController extends Controller implements HasMiddleware
      */
     public function store(Request $request)
     {
-        //
+        // validate request
+        $request->validate([
+            'name' => 'required|unique:roles'
+        ]);
+
+        // create role data
+        $role = Role::create(['name' => $request->name]);
+
+        // attach permissions to role
+        $role->givePermissionTo($request->permissions);
+
+        // render view
+        return to_route('apps.roles.index')->with('toast_success', 'Data berhasil ditambahkan');
     }
 
     /**
