@@ -31,6 +31,13 @@
                                     @endforeach
                                 </td>
                                 <td width="200px">
+                                    @can('roles-update')
+                                        <x-button
+                                            title="Edit Data"
+                                            type="edit"
+                                            :url="route('apps.roles.edit', $role->id)"
+                                        />
+                                    @endcan
                                     @can('roles-delete')
                                         <x-button
                                             title="Hapus Data"
