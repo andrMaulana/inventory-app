@@ -30,7 +30,16 @@
                                         <span class="btn btn-sm bg-teal text-white">{{ $permission->name }}</span>
                                     @endforeach
                                 </td>
-                                <td></td>
+                                <td width="200px">
+                                    @can('roles-delete')
+                                        <x-button
+                                            title="Hapus Data"
+                                            type="delete"
+                                            :id="$role->id"
+                                            :url="route('apps.roles.destroy', $role->id)"
+                                        />
+                                    @endcan
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
