@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Apps;
 
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
