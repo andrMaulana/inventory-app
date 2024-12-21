@@ -3,21 +3,20 @@
 namespace App\Http\Controllers\Apps;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
-
     public static function middleware()
     {
         return [
             new Middleware('permission:users-access', only: ['index']),
             new Middleware('permission:users-update', only: ['update']),
-            new Middleware('permission:user-delete', only: ['destroy']),
+            new Middleware('permission:users-delete', only: ['destroy']),
         ];
     }
 
@@ -29,43 +28,11 @@ class UserController extends Controller
         // get all user data with paginate
         $users = User::with('roles')->search('name')->latest()->paginate(10);
 
-        // get all roles data
+        // get all role data
         $roles = Role::select('id', 'name')->orderBy('name')->get();
 
         // render view
         return view('pages.apps.users.index', compact('users', 'roles'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -77,7 +44,7 @@ class UserController extends Controller
         $user->syncRoles($request->roles);
 
         // render view
-        return back()->with('toast_success', 'Data berhasil ditambahkan');
+        return back()->with('toast_success', 'Data berhasil disimpan.');
     }
 
     /**
