@@ -25,7 +25,16 @@
                                         <span class="btn btn-sm bg-teal text-white">{{ $role->name }}</span>
                                     @endforeach
                                 </td>
-                                <td></td>
+                                <td>
+                                    @can('users-delete')
+                                        <x-button
+                                            title="Hapus Data"
+                                            type="delete"
+                                            :id="$user->id"
+                                            :url="route('apps.users.destroy', $user->id)"
+                                        />
+                                    @endcan
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
