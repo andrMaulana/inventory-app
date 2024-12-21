@@ -26,7 +26,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        // get all user data with paginate
+        $users = User::with('roles')->search('name')->latest()->paginate(10);
+
+        // get all roles data
+        $roles = Role::select('id', 'name')->orderBy('name')->get();
+
+        // render view
+        return view('pages.apps.users.index', compact('users', 'roles'));
     }
 
     /**
