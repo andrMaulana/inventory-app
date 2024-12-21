@@ -71,9 +71,13 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        // sync role users
+        $user->syncRoles($request->roles);
+
+        // render view
+        return back()->with('toast_success', 'Data berhasil ditambahkan');
     }
 
     /**
