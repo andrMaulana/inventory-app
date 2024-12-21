@@ -6,9 +6,21 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
 class UserController extends Controller
 {
+
+    public static function middleware()
+    {
+        return [
+            new Middleware('permission:users-access', only: ['index']),
+            new Middleware('permission:users-update', only: ['update']),
+            new Middleware('permission:user-delete', only: ['destroy']),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
