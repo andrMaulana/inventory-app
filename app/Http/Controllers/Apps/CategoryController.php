@@ -55,7 +55,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        // render view
+        return view('pages.apps.categories.create');
     }
 
     /**
