@@ -43,7 +43,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        // get all categories data with paginate
+        $categories = Category::search('name')->latest()->paginate(10)->withQueryString();
+
+        // render view
+        return view('pages.apps.categories.index', compact('categories'));
     }
 
     /**
