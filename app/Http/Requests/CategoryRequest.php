@@ -21,8 +21,16 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        if ($this->method() === 'POST') {
+            return [
+                'name' => 'required|unique:categories',
+                'image' => 'required|mimes:png,jpg,jpeg|max:2048'
+            ];
+        }elseif ($this->method() === 'PUT') {
+            return [
+                'name' => 'required|unique:categories,name' . $this->category->id,
+                'image' => 'mimes:png,jpg,jpeg|max:2048'
+            ];
+        }
     }
 }
