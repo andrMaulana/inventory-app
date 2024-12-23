@@ -28,7 +28,16 @@
                                     <span class="avatar rounded avatar-md" style="background-image: url({{ $category->image }})"></span>
                                 </td>
                                 <td>{{ $category->name }}</td>
-                                <td></td>
+                                <td>
+                                    @can('categories-delete')
+                                        <x-button
+                                            title="Hapus Data"
+                                            type="delete"
+                                            :id="$category->id"
+                                            :url="route('apps.categories.destroy', $category->id)"
+                                        />
+                                    @endcan
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
