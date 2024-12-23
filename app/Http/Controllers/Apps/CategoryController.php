@@ -18,6 +18,13 @@ class CategoryController extends Controller
     */
     use HasImage;
 
+
+    /**
+     * path categories image
+     */
+    private $path = 'public/categories/';
+
+
     /**
      * Display a listing of the resource.
      */
