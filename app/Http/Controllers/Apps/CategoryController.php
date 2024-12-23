@@ -62,11 +62,20 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
-    }
+        // call trait upload image
+        $image = $this->uploadImage($request, $this->path);
 
+        // create category data
+        Category::create([
+            'name' => $request->name,
+            'image' => $image->hashName(),
+        ]);
+
+        // render view
+        return to_route('apps.categories.index')->with('toast_success', 'Data berhasil ditambahkan');
+    }
     /**
      * Display the specified resource.
      */
