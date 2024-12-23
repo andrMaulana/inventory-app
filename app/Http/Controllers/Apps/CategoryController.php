@@ -115,8 +115,17 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        // delete category data
+        $success = $category->delete();
+
+        // check when delete category data success
+        if($success)
+            // delete category data
+            Storage::disk('local')->delete($this->path. basename($category->image));
+
+        // render view
+        return back()->with('toast_success', 'Data berhasil dihapus');
     }
 }
