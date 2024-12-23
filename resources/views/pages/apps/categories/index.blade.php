@@ -29,6 +29,13 @@
                                 </td>
                                 <td>{{ $category->name }}</td>
                                 <td>
+                                    @can('categories-update')
+                                        <x-button
+                                            title="Ubah Data"
+                                            type="edit"
+                                            :url="route('apps.categories.edit', $category->id)"
+                                        />
+                                    @endcan
                                     @can('categories-delete')
                                         <x-button
                                             title="Hapus Data"
