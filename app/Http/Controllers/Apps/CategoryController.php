@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+
+     /**
+     * call trait HasImage
+    */
+    use HasImage;
+
     /**
      * Display a listing of the resource.
      */
