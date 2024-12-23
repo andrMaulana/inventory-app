@@ -24,6 +24,19 @@ class CategoryController extends Controller
      */
     private $path = 'public/categories/';
 
+        /**
+     * middleware
+     */
+    public static function middleware()
+    {
+        return [
+            new Middleware('permission:categories-access', only : ['index']),
+            new Middleware('permission:categories-create', only : ['create', 'store']),
+            new Middleware('permission:categories-update', only : ['edit', 'update']),
+            new Middleware('permission:categories-delete', only : ['destroy']),
+        ];
+    }
+
 
     /**
      * Display a listing of the resource.
