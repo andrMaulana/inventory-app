@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Apps;
 
+use App\Models\Category;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
+use App\Traits\HasImage;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
