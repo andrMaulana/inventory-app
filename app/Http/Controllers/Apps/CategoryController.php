@@ -95,9 +95,21 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        // call trait upload image
+        $image = $this->uploadImage($request, $this->path);
+
+        // check when user send request image
+        if($request->file('image'))
+            // call trait update image
+            $this->updateImage($this->path, $category, $image->hashName());
+
+        // update category data
+        $category->update(['name' => $request->name]);
+
+        // render view
+        return to_route('apps.categories.index')->with('toast_success', 'Data berhasil disimpan');
     }
 
     /**
