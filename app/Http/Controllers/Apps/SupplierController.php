@@ -42,8 +42,10 @@ class SupplierController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        //
+        // render view
+        return view('pages.apps.suppliers.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
