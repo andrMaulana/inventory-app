@@ -75,9 +75,17 @@ class SupplierController extends Controller implements HasMiddleware
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SupplierRequest $request, Supplier $supplier)
     {
-        //
+        // update supplier data
+        $supplier->update([
+            'name' => $request->name,
+            'telp' => $request->telp,
+            'address' => $request->address,
+        ]);
+
+        // render view
+        return to_route('apps.suppliers.index')->with('toast_success', 'Data berhasil disimpan');
     }
 
     /**
