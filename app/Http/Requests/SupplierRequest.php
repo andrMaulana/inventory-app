@@ -21,8 +21,17 @@ class SupplierRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        if($this->method() === 'POST')
+            return [
+                'name' => 'required|unique:suppliers',
+                'telp' => 'required|numeric|digits_between:1,12',
+                'address' => 'required|string',
+            ];
+        elseif($this->method() === 'PUT')
+            return [
+                'name' => 'required|unique:suppliers,name,'. $this->supplier->id,
+                'telp' => 'required|numeric|digits_between:1,12',
+                'address' => 'required|string',
+            ];
     }
 }
