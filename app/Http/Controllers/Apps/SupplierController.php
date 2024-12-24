@@ -9,7 +9,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
 
-class SupplierController extends Controller
+class SupplierController extends Controller implements HasMiddleware
 {
     /**
      * Display a listing of the resource.
