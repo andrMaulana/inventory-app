@@ -66,9 +66,10 @@ class SupplierController extends Controller implements HasMiddleware
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Supplier $supplier)
     {
-        //
+        // render view
+        return view('pages.apps.suppliers.edit', compact('supplier'));
     }
 
     /**
