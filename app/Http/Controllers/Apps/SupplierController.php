@@ -11,6 +11,20 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 
 class SupplierController extends Controller implements HasMiddleware
 {
+
+    /**
+     * middleware
+     */
+    public static function middleware()
+    {
+        return [
+            new Middleware('permission:suppliers-access', only: ['index']),
+            new Middleware('permission:suppliers-create', only: ['create', 'store']),
+            new Middleware('permission:suppliers-update', only: ['edit', 'update']),
+            new Middleware('permission:suppliers-delete', only: ['destory']),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
