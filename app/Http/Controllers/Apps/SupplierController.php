@@ -30,7 +30,11 @@ class SupplierController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        //
+        // get all suppliers data with paginate
+        $suppliers = Supplier::search('name')->latest()->paginate(10)->withQueryString();
+
+        // render view
+        return view('pages.apps.suppliers.index', compact('suppliers'));
     }
 
     /**
