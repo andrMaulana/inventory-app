@@ -91,8 +91,12 @@ class SupplierController extends Controller implements HasMiddleware
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Supplier $supplier)
     {
-        //
+        // delete supplier data
+        $supplier->delete();
+
+        // render view
+        return back()->with('toast_success', 'Data berhasil dihapus');
     }
 }
