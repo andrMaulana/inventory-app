@@ -35,6 +35,13 @@
                                     {{ $supplier->address }}
                                 </td>
                                 <td>
+                                    @can('suppliers-update')
+                                        <x-button
+                                            title="Ubah Data"
+                                            type="edit"
+                                            :url="route('apps.suppliers.edit', $supplier->id)"
+                                        />
+                                    @endcan
                                     @can('suppliers-delete')
                                         <x-button
                                             title="Hapus Data"
