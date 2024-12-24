@@ -50,9 +50,17 @@ class SupplierController extends Controller implements HasMiddleware
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SupplierRequest $request)
     {
-        //
+        // create supplier data
+        Supplier::create([
+            'name' => $request->name,
+            'telp' => $request->telp,
+            'address' => $request->address,
+        ]);
+
+        // render view
+        return to_route('apps.suppliers.index')->with('toast_success', 'Data berhasil ditambahkan');
     }
 
     /**
