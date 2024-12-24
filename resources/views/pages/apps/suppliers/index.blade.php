@@ -1,6 +1,5 @@
 @extends('layouts.apps.master', ['title' => 'Data Supplier'])
 
-
 @section('content')
     <x-container>
         <div class="col-12">
@@ -36,6 +35,14 @@
                                     {{ $supplier->address }}
                                 </td>
                                 <td>
+                                    @can('suppliers-delete')
+                                        <x-button
+                                            title="Hapus Data"
+                                            type="delete"
+                                            :id="$supplier->id"
+                                            :url="route('apps.suppliers.destroy', $supplier->id)"
+                                        />
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
