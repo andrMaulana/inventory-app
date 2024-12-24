@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apps\RoleController;
 use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Apps\CategoryController;
+use App\Http\Controllers\Apps\SupplierController;
 use App\Http\Controllers\Apps\DashboardController;
 use App\Http\Controllers\Apps\PermissionController;
 
@@ -16,6 +17,8 @@ Route::group(['prefix' => 'apps', 'as' => 'apps.', 'middleware' => ['auth']], fu
     Route::get('dashboard', DashboardController::class)->name('dashboard');
     // categories
     Route::resource('categories', CategoryController::class)->except(['show']);
+     // suppliers
+     Route::resource('suppliers', SupplierController::class)->except(['show']);
     // permissions
     Route::resource('permissions', PermissionController::class)->except(['create', 'edit', 'show']);
     // roles
