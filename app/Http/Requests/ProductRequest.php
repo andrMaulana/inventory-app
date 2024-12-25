@@ -21,8 +21,23 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        if($this->method() === 'POST')
+            return [
+                'name' => 'required|unique:products',
+                'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+                'category_id' => 'required',
+                'supplier_id' => 'required',
+                'description' => 'required',
+                'unit' => 'required',
+            ];
+        elseif($this->method() === 'PUT')
+            return [
+                'name' => 'required','unique:products,name'.$this->product->id,
+                'image' => 'mimes:png,jpg,jpeg|max:2048',
+                'category_id' => 'required',
+                'supplier_id' => 'required',
+                'description' => 'required',
+                'unit' => 'required',
+            ];
     }
 }
