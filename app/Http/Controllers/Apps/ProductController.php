@@ -10,6 +10,7 @@ use App\Traits\HasImage;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
 
 class ProductController extends Controller
