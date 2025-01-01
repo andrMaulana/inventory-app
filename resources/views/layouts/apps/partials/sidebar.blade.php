@@ -101,23 +101,23 @@
                     </li>
                 @endcan
                 @can('products-access')
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block mr-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-database"
-                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="1.25"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
-                                    <path d="M4 6v6a8 3 0 0 0 16 0v-6"></path>
-                                    <path d="M4 12v6a8 3 0 0 0 16 0v-6"></path>
-                                </svg>
-                            </span>
-                            <span class="nav-link-title">
-                                Produk
-                            </span>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('apps.products*') }}" href="{{ route('apps.products.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block mr-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-database"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.25"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
+                                <path d="M4 6v6a8 3 0 0 0 16 0v-6"></path>
+                                <path d="M4 12v6a8 3 0 0 0 16 0v-6"></path>
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            Produk
+                        </span>
+                    </a>
+                  </li>
                 @endcan
                 @can('stocks-access')
                     <div class="hr-text hr-text-left ml-2 mb-2 mt-2">Management Stok</div>
