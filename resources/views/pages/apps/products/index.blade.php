@@ -34,7 +34,16 @@
                                         <small class="text-secondary">{{ $product->category->name }}</small>
                                     </div>
                                 </td>
-                                <td></td>
+                                <td>
+                                    @can('products-delete')
+                                        <x-button
+                                            title="Hapus Data"
+                                            type="delete"
+                                            :id="$product->id"
+                                            :url="route('apps.products.destroy', $product->id)"
+                                        />
+                                    @endcan
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
