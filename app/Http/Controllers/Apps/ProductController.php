@@ -21,6 +21,11 @@ class ProductController extends Controller implements HasMiddleware
     */
     use HasImage;
 
+    /**
+     * path productss image
+     */
+    private $path = 'public/products/';
+
 
     /**
      * Display a listing of the resource.
