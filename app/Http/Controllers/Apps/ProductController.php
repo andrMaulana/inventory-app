@@ -44,7 +44,11 @@ class ProductController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        //
+      // get all products data with paginate
+      $products = Product::with('category', 'supplier')->search('name')->latest()->paginate(10)->withQueryString();
+
+      // render view
+      return view('pages.apps.products.index', compact('products'));
     }
 
     /**
