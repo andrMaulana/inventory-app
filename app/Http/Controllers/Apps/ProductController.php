@@ -26,6 +26,18 @@ class ProductController extends Controller implements HasMiddleware
      */
     private $path = 'public/products/';
 
+    /**
+     * middleware
+     */
+    public static function middleware()
+    {
+        return [
+            new Middleware('permission:products-access', only : ['index']),
+            new Middleware('permission:products-create', only : ['create', 'store']),
+            new Middleware('permission:products-update', only : ['edit', 'update']),
+            new Middleware('permission:products-delete', only : ['destroy']),
+        ];
+    }
 
     /**
      * Display a listing of the resource.
