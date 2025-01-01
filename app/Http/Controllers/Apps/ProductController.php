@@ -101,9 +101,16 @@ class ProductController extends Controller implements HasMiddleware
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        // get all categories data
+        $categories = Category::select('id', 'name')->orderBy('name')->get();
+
+        // get all suppliers data
+        $suppliers = Supplier::select('id', 'name')->orderBy('name')->get();
+
+        // render view
+        return view('pages.apps.products.edit', compact('categories', 'suppliers', 'product'));
     }
 
     /**
