@@ -13,7 +13,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
 
-class ProductController extends Controller
+class ProductController extends Controller implements HasMiddleware
 {
     /**
      * Display a listing of the resource.
