@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Apps;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Supplier;
 use App\Traits\HasImage;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Routing\Controllers\Middleware;
@@ -56,7 +57,15 @@ class ProductController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        //
+        // get all categories data
+        $categories = Category::select('id', 'name')->orderBy('name')->get();
+
+        // get all suppliers data
+        $suppliers = Supplier::select('id', 'name')->orderBy('name')->get();
+
+        // render view
+        return view('pages.apps.products.create', compact('categories', 'suppliers'));
+
     }
 
     /**
