@@ -35,6 +35,13 @@
                                     </div>
                                 </td>
                                 <td>
+                                    @can('products-update')
+                                        <x-button
+                                            title="Ubah Data"
+                                            type="edit"
+                                            :url="route('apps.products.edit', $product->id)"
+                                        />
+                                    @endcan
                                     @can('products-delete')
                                         <x-button
                                             title="Hapus Data"
