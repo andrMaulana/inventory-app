@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Traits\HasImage;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Routing\Controllers\Middleware;
 
 
 class ProductController extends Controller
