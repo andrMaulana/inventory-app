@@ -142,8 +142,17 @@ class ProductController extends Controller implements HasMiddleware
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+       // delete product data
+       $success = $product->delete();
+
+       // check when delete product data success
+       if($success)
+           // delete product data
+           Storage::disk('local')->delete($this->path. basename($product->image));
+
+       // render view
+       return back()->with('toast_success', 'Data berhasil dihapus');
     }
 }
