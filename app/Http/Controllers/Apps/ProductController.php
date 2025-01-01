@@ -15,6 +15,13 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 
 class ProductController extends Controller implements HasMiddleware
 {
+
+    /**
+     * call trait HasImage
+    */
+    use HasImage;
+
+
     /**
      * Display a listing of the resource.
      */
