@@ -71,9 +71,23 @@ class ProductController extends Controller implements HasMiddleware
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+       // call trait upload image
+       $image = $this->uploadImage($request, $this->path);
+
+       // create product data
+       Product::create([
+           'name' => $request->name,
+           'category_id' => $request->category_id,
+           'supplier_id' => $request->supplier_id,
+           'description' => $request->description,
+           'unit' => $request->unit,
+           'image' => $image->hashName(),
+       ]);
+
+       // render view
+       return to_route('apps.products.index')->with('toast_success', 'Data berhasil ditambahkan');
     }
 
     /**
