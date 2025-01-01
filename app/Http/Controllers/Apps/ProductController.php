@@ -116,9 +116,27 @@ class ProductController extends Controller implements HasMiddleware
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        // call trait upload image
+        $image = $this->uploadImage($request, $this->path);
+
+        // check when user send request image
+        if($request->file('image'))
+            // call trait update image
+            $this->updateImage($this->path, $product, $image->hashName());
+
+        // update product data
+        $product->update([
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'supplier_id' => $request->supplier_id,
+            'description' => $request->description,
+            'unit' => $request->unit,
+        ]);
+
+        // render view
+        return to_route('apps.products.index')->with('toast_success', 'Data berhasil disimpan');
     }
 
     /**
