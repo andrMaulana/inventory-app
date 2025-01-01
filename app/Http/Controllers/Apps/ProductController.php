@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Traits\HasImage;
+use App\Http\Requests\ProductRequest;
 
 
 class ProductController extends Controller
