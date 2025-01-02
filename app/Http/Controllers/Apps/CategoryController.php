@@ -10,21 +10,19 @@ use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Storage;
 
-class CategoryController extends Controller
+class CategoryController extends Controller implements HasMiddleware
 {
-
-     /**
+    /**
      * call trait HasImage
     */
     use HasImage;
-
 
     /**
      * path categories image
      */
     private $path = 'public/categories/';
 
-        /**
+    /**
      * middleware
      */
     public static function middleware()
@@ -36,7 +34,6 @@ class CategoryController extends Controller
             new Middleware('permission:categories-delete', only : ['destroy']),
         ];
     }
-
 
     /**
      * Display a listing of the resource.
@@ -76,13 +73,6 @@ class CategoryController extends Controller
         // render view
         return to_route('apps.categories.index')->with('toast_success', 'Data berhasil ditambahkan');
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -92,6 +82,7 @@ class CategoryController extends Controller
         // render view
         return view('pages.apps.categories.edit', compact('category'));
     }
+
     /**
      * Update the specified resource in storage.
      */
@@ -110,6 +101,19 @@ class CategoryController extends Controller
 
         // render view
         return to_route('apps.categories.index')->with('toast_success', 'Data berhasil disimpan');
+
+        // $image = $this->uploadImage($request, $this->path);
+
+        // $data = ['name' => $request->name];
+
+        // if($request->file('image')) {
+        //     $this->updateImage($this->path, $category, $image->hashName());
+        //     $data['image'] = $image->hashName();
+        // }
+
+        // $category->update($data);
+
+        // return to_route('apps.categories.index')->with('toast_success', 'Data berhasil disimpan');
     }
 
     /**
