@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apps\RoleController;
 use App\Http\Controllers\Apps\UserController;
+use App\Http\Controllers\Apps\StockController;
 use App\Http\Controllers\Apps\ProductController;
 use App\Http\Controllers\Apps\CategoryController;
 use App\Http\Controllers\Apps\SupplierController;
@@ -22,6 +23,11 @@ Route::group(['prefix' => 'apps', 'as' => 'apps.', 'middleware' => ['auth']], fu
      Route::resource('suppliers', SupplierController::class)->except(['show']);
     // products
     Route::resource('products', ProductController::class)->except(['show']);
+    // stocks
+    Route::controller(StockController::class)->as('stocks.')->prefix('stocks')->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::post('/{product}', 'store')->name('store');
+    });
     // permissions
     Route::resource('permissions', PermissionController::class)->except(['create', 'edit', 'show']);
     // roles
