@@ -20,4 +20,19 @@ class StockController extends Controller implements HasMiddleware
             new Middleware('permission:stocks-create', only : ['store'])
         ];
     }
+
+    /**
+    *  Display a listing of the resource
+    */
+
+    public function index()
+    {
+        // get all products data with paginate
+        $products = Product::with(['category', 'stocks', 'stock' => function($query){
+            $query->selectRaw('product_id, SUM(CASE WHEN type = "in" THEN quantity ELSE quantity*-1 END) as stock')->groupBy('product_id');
+        }])->search('name')->latest()->paginate(10)->withQueryString();
+
+        // render view
+        return view('pages.apps.stocks.index', compact('products'));
+    }
 }
