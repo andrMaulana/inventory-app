@@ -35,4 +35,24 @@ class StockController extends Controller implements HasMiddleware
         // render view
         return view('pages.apps.stocks.index', compact('products'));
     }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function strore(Product $product, Request $request)
+    {
+        // validate request
+        $request->validate([
+            'quantity' => 'required|integer|gt:0'
+        ]);
+
+        // created new stock
+        $product->stock()->create([
+            'type' => 'in',
+            'quantity' => $request->quantity
+        ]);
+
+        // render view
+        return back()->with('toast_success', 'Data berhasil disimpan');
+    }
 }
