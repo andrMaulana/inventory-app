@@ -9,6 +9,7 @@ use App\Http\Controllers\Apps\CategoryController;
 use App\Http\Controllers\Apps\SupplierController;
 use App\Http\Controllers\Apps\DashboardController;
 use App\Http\Controllers\Apps\PermissionController;
+use App\Http\Controllers\Apps\TransactionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +29,8 @@ Route::group(['prefix' => 'apps', 'as' => 'apps.', 'middleware' => ['auth']], fu
         Route::get('/', 'index')->name('index');
         Route::post('/{product}', 'store')->name('store');
     });
+    // transactions
+    Route::get('/transactions', TransactionController::class)->name('transaction');
     // permissions
     Route::resource('permissions', PermissionController::class)->except(['create', 'edit', 'show']);
     // roles
