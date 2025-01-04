@@ -3,7 +3,7 @@
 @section('content')
     <x-container>
         <div class="col-12">
-            <x-card-action title="Daftar Transaksi" url="{{ route('apps.transactions') }}">
+            <x-card-action title="Daftar Transaksi" url="{{ route('apps.transaction') }}">
                 <x-table>
                     <thead>
                         <tr>
