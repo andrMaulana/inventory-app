@@ -147,26 +147,26 @@
                     <div class="hr-text hr-text-left ml-2 mb-2 mt-2">Transaksi</div>
                 @endcanany
                 @can('transactions-access')
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <span class="nav-link-icon d-md-none d-lg-inline-block mr-1">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="icon icon-tabler icon-tabler-database-export" width="24" height="24"
-                                    viewBox="0 0 24 24" stroke-width="1.25" stroke="currentColor" fill="none"
-                                    stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
-                                    <path d="M4 6v6c0 1.657 3.582 3 8 3a19.84 19.84 0 0 0 3.302 -.267m4.698 -2.733v-6">
-                                    </path>
-                                    <path d="M4 12v6c0 1.599 3.335 2.905 7.538 2.995m8.462 -6.995v-2m-6 7h7m-3 -3l3 3l-3 3">
-                                    </path>
-                                </svg>
-                            </span>
-                            <span class="nav-link-title">
-                                Transaksi
-                            </span>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::is('apps.transaction') ? 'text-cyan' : '' }}" href="{{ route('apps.transaction') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block mr-1">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="icon icon-tabler icon-tabler-database-export" width="24" height="24"
+                                viewBox="0 0 24 24" stroke-width="1.25" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
+                                <path d="M4 6v6c0 1.657 3.582 3 8 3a19.84 19.84 0 0 0 3.302 -.267m4.698 -2.733v-6">
+                                </path>
+                                <path d="M4 12v6c0 1.599 3.335 2.905 7.538 2.995m8.462 -6.995v-2m-6 7h7m-3 -3l3 3l-3 3">
+                                </path>
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            Transaksi
+                        </span>
+                    </a>
+                </li>
                 @endcan
                 @can('orders-access')
                     <li class="nav-item">
