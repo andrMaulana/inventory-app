@@ -115,4 +115,15 @@ class OrderController extends Controller
         // render view
         return back()->with('toast_success', 'Data berhasil disimpan');
     }
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Order $order)
+    {
+        // delete order data
+        $order->delete();
+
+        // render view
+        return back()->with('toast_success', 'Data berhasil dihapus');
+    }
 }
