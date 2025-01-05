@@ -44,4 +44,27 @@ class OrderController extends Controller
         // render view
         return view('pages.apps.orders.index', compact('orders', 'products'));
     }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // validate request
+        $request->validate([
+            'product_id' => 'required',
+            'quantity' => 'required|integer|gt:0'
+        ]);
+
+        // create order data
+        Order::create([
+            'user_id' => $request->user()->id,
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+            'status' => OrderStatus::Pending,
+        ]);
+
+        // render view
+        return back()->with('toast_success', 'Data berhasil disimpan');
+    }
 }
