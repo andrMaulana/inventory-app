@@ -13,8 +13,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
-class OrderController extends Controller
+class OrderController extends Controller implements HasMiddleware
 {
+
+    /**
+    * middleware
+    */
+    public static function middleware()
+    {
+        return [
+            new Middleware('permission:stocks-access', only : ['index']),
+            new Middleware('permission:stocks-create', only : ['store']),
+        ];
+    }
+
      /**
      * Display a listing of the resource.
      */
