@@ -67,4 +67,52 @@ class OrderController extends Controller
         // render view
         return back()->with('toast_success', 'Data berhasil disimpan');
     }
+
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Order $order)
+    {
+        // check permissions users and order status
+        if($request->user()->can('orders-users') && $order->status == OrderStatus::Pending){
+            // validate request
+            $request->validate([
+                'product_id' => 'required',
+                'quantity' => 'required|integer|gt:0'
+            ]);
+
+            // update order data
+            $order->update([
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+            ]);
+
+        // check permissions users and order status
+        }elseif($request->user()->can('orders-admin') && $order->status == OrderStatus::Pending){
+            // update order data
+            $order->update([
+                'status' => OrderStatus::Verified,
+            ]);
+
+        // check permissions users and order status
+        }elseif($request->user()->can('orders-admin') && $order->status == OrderStatus::Verified){
+            // create stock data
+            $stock = Stock::create([
+                'product_id' => $order->product_id,
+                'type' => 'in',
+                'quantity' => $order->quantity,
+            ]);
+
+            // check when stock is true
+            if($stock)
+                // update order data
+                $order->update([
+                    'status' => OrderStatus::Success,
+                ]);
+        }
+
+        // render view
+        return back()->with('toast_success', 'Data berhasil disimpan');
+    }
 }
