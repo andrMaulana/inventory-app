@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apps\RoleController;
 use App\Http\Controllers\Apps\UserController;
+use App\Http\Controllers\Apps\OrderController;
 use App\Http\Controllers\Apps\StockController;
 use App\Http\Controllers\Apps\ProductController;
 use App\Http\Controllers\Apps\CategoryController;
@@ -29,6 +30,8 @@ Route::group(['prefix' => 'apps', 'as' => 'apps.', 'middleware' => ['auth']], fu
         Route::get('/', 'index')->name('index');
         Route::post('/{product}', 'store')->name('store');
     });
+    // orders
+    Route::resource('orders', OrderController::class);
     // transactions
     Route::get('/transactions', TransactionController::class)->name('transaction');
     // permissions
