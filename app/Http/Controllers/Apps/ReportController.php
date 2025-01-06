@@ -145,4 +145,22 @@ class ReportController extends Controller implements HasMiddleware
         // render view
         return view('pages.apps.reports.index', compact('reports', 'products', 'min_date', 'max_date', 'from_date', 'to_date', 'first_stock'));
     }
+
+    /**
+     * export spesific of the resource.
+    */
+    public function download($type, $from_date, $to_date)
+    {
+        // get products with stocks
+        $reports = $this->getProductWithStocks($from_date, $to_date, $type);
+
+        // get first stock product
+        $first_stock = $this->getFirstStock($from_date);
+
+        // load pdf view
+        $pdf = PDF::loadView('pages.apps.reports.download', compact('from_date', 'to_date', 'reports', 'first_stock'))->setPaper('a4', 'landscape');
+
+        // download pdf
+        return $pdf->download('Laporan - '.Carbon::parse($from_date)->format('d M Y').' - '.Carbon::parse($to_date)->format('d M Y').'.pdf');
+    }
 }
