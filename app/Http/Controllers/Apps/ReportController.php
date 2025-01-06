@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Apps;
 
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use App\Models\Stock;
 use App\Models\Product;
