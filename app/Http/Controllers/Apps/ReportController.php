@@ -13,5 +13,13 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 
 class ReportController extends Controller implements HasMiddleware
 {
-    //
+    /**
+     * middleware
+     */
+    public static function middleware()
+    {
+        return [
+            new Middleware('permission:reports-access', only : ['index', 'filter', 'download']),
+        ];
+    }
 }
