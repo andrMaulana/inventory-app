@@ -102,4 +102,47 @@ class ReportController extends Controller implements HasMiddleware
         // render view
         return view('pages.apps.reports.index', compact('min_date', 'max_date', 'products', 'from_date', 'to_date'));
     }
+
+    /**
+     * Display spesific of the resource.
+    */
+    public function filter(Request $request)
+    {
+        // validate request
+        $request->validate([
+            'product' => 'required',
+            'from_date' => 'required',
+            'to_date' => 'required',
+        ]);
+
+        // request from_date
+        $from_date = $request->from_date;
+
+        // request to_date
+        $to_date = $request->to_date;
+
+        // request product
+        $product = $request->product;
+
+        // get first date stock
+        $min_date_stock = Stock::select('created_at')->orderBy('created_at', 'asc')->first();
+
+        // format first date stock
+        $min_date = $min_date_stock->created_at->format('Y-m-d');
+
+        // max date is today
+        $max_date = Carbon::today()->format('Y-m-d');
+
+        // get all products data
+        $products = Product::select('id', 'name')->orderBy('name')->get();
+
+        // get products with stocks
+        $reports = $this->getProductWithStocks($from_date, $to_date, $product);
+
+        // get first stock product
+        $first_stock = $this->getFirstStock($from_date);
+
+        // render view
+        return view('pages.apps.reports.index', compact('reports', 'products', 'min_date', 'max_date', 'from_date', 'to_date', 'first_stock'));
+    }
 }
