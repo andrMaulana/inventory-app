@@ -71,4 +71,13 @@ class CartController extends Controller
             return back()->with('toast_success', 'Jumlah produk berhasil diubah');
         }
     }
+
+    public function destroy(Cart $cart)
+    {
+        // delete cart data
+        $cart->delete();
+
+        // render view
+        return back()->with('toast_success', 'Produk berhasil dikeluarkan dari keranjang');
+    }
 }
