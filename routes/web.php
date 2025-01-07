@@ -1,20 +1,29 @@
 <?php
 
-use App\Http\Controllers\Apps\CategoryController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Apps\DashboardController;
-use App\Http\Controllers\Apps\OrderController;
-use App\Http\Controllers\Apps\PermissionController;
-use App\Http\Controllers\Apps\ProductController;
-use App\Http\Controllers\Apps\ReportController;
+use App\Http\Controllers\Web\CartController;
 use App\Http\Controllers\Apps\RoleController;
-use App\Http\Controllers\Apps\StockController;
-use App\Http\Controllers\Apps\SupplierController;
-use App\Http\Controllers\Apps\TransactionController;
 use App\Http\Controllers\Apps\UserController;
+use App\Http\Controllers\Apps\OrderController;
+use App\Http\Controllers\Apps\StockController;
+use App\Http\Controllers\Apps\ReportController;
+use App\Http\Controllers\Apps\ProductController;
+use App\Http\Controllers\Apps\CategoryController;
+use App\Http\Controllers\Apps\SupplierController;
+use App\Http\Controllers\Apps\DashboardController;
+use App\Http\Controllers\Apps\PermissionController;
+use App\Http\Controllers\Apps\TransactionController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+// cart
+Route::controller(CartController::class)->middleware('auth')->as('cart.')->group(function(){
+    Route::get('/cart', 'index')->name('index');
+    Route::post('/cart/{product:id}', 'store')->name('store');
+    Route::put('/cart/update/{cart:id}', 'update')->name('update');
+    Route::delete('/cart/delete/{cart}', 'destroy')->name('destroy');
 });
 
 Route::group(['prefix' => 'apps', 'as' => 'apps.', 'middleware' => ['auth']], function(){
