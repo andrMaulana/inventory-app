@@ -46,4 +46,29 @@ class CartController extends Controller
             return redirect(route('cart.index'))->with('toast_success', 'Produk berhasil ditambahkan keranjang');
         }
     }
+
+    public function update(Request $request, Cart $cart)
+    {
+        // get product data by id
+        $product = Product::with(['category', 'supplier', 'stock' => function($query){
+            $query->selectRaw('product_id, SUM(CASE WHEN type = "in" THEN quantity ELSE quantity*-1 END) as stock')
+            ->groupBy('product_id');
+        }])->whereId($cart->product_id)->first();
+
+        if($product->stock->stock < $request->quantity){
+            // render view
+            return back()->with('toast_error', 'Stok produk tidak mencukupi');
+        }elseif($request->quantity <= 0){
+            // render view
+            return back()->with('toast_error', 'Mohon masukan jumlah yg valid');
+        }else{
+            // update cart quantity
+            $cart->update([
+                'quantity' => $request->quantity,
+            ]);
+
+            // render view
+            return back()->with('toast_success', 'Jumlah produk berhasil diubah');
+        }
+    }
 }
