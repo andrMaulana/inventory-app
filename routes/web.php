@@ -15,6 +15,7 @@ use App\Http\Controllers\Apps\DashboardController;
 use App\Http\Controllers\Apps\PermissionController;
 use App\Http\Controllers\Apps\TransactionController;
 use App\Http\Controllers\Web\ProductController as WebProductController;
+use App\Http\Controllers\Web\CategoryController as WebCategoryController;
 
 // home
 Route::get('/', HomeController::class)->name('home');
@@ -23,6 +24,12 @@ Route::get('/', HomeController::class)->name('home');
 Route::controller(WebProductController::class)->as('product.')->group(function(){
     Route::get('/product', 'index')->name('index');
     Route::get('/product/{product:slug}', 'show')->name('show');
+});
+
+// category
+Route::controller(WebCategoryController::class)->as('category.')->group(function(){
+    Route::get('/category', 'index')->name('index');
+    Route::get('/category/{category:slug}', 'show')->name('show');
 });
 
 // cart
