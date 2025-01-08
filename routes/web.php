@@ -14,9 +14,16 @@ use App\Http\Controllers\Apps\SupplierController;
 use App\Http\Controllers\Apps\DashboardController;
 use App\Http\Controllers\Apps\PermissionController;
 use App\Http\Controllers\Apps\TransactionController;
+use App\Http\Controllers\Web\ProductController as WebProductController;
 
 // home
 Route::get('/', HomeController::class)->name('home');
+
+// product
+Route::controller(WebProductController::class)->as('product.')->group(function(){
+    Route::get('/product', 'index')->name('index');
+    Route::get('/product/{product:slug}', 'show')->name('show');
+});
 
 // cart
 Route::controller(CartController::class)->middleware('auth')->as('cart.')->group(function(){
