@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\CartController;
+use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Apps\RoleController;
 use App\Http\Controllers\Apps\UserController;
 use App\Http\Controllers\Apps\OrderController;
@@ -14,9 +15,8 @@ use App\Http\Controllers\Apps\DashboardController;
 use App\Http\Controllers\Apps\PermissionController;
 use App\Http\Controllers\Apps\TransactionController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// home
+Route::get('/', HomeController::class)->name('home');
 
 // cart
 Route::controller(CartController::class)->middleware('auth')->as('cart.')->group(function(){
