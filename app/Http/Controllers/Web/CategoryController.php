@@ -19,4 +19,9 @@ class CategoryController extends Controller
         // render view
         return view('web.categories.index', compact('categories'));
     }
+
+    public function show(Category $category)
+    {
+
+    }
 }
