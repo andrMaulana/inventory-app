@@ -16,6 +16,7 @@ use App\Http\Controllers\Apps\PermissionController;
 use App\Http\Controllers\Apps\TransactionController;
 use App\Http\Controllers\Web\ProductController as WebProductController;
 use App\Http\Controllers\Web\CategoryController as WebCategoryController;
+use App\Http\Controllers\Web\TransactionController as WebTransactionController;
 
 // home
 Route::get('/', HomeController::class)->name('home');
@@ -39,6 +40,9 @@ Route::controller(CartController::class)->middleware('auth')->as('cart.')->group
     Route::put('/cart/update/{cart:id}', 'update')->name('update');
     Route::delete('/cart/delete/{cart}', 'destroy')->name('destroy');
 });
+
+// transaction
+Route::post('/transaction', WebTransactionController::class)->middleware('auth')->name('transaction.store');
 
 Route::group(['prefix' => 'apps', 'as' => 'apps.', 'middleware' => ['auth']], function(){
     // dashboard
