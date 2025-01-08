@@ -58,20 +58,26 @@ Route::group(['prefix' => 'apps', 'as' => 'apps.', 'middleware' => ['auth']], fu
         Route::get('/', [StockController::class, 'index'])->name('index');
         Route::post('/{product}', [StockController::class, 'store'])->name('store');
     });
+
     // transactions
     Route::get('/transactions', TransactionController::class)->name('transaction');
+
   	// orders
     Route::resource('orders', OrderController::class);
+
     // reports
     Route::controller(ReportController::class)->as('reports.')->prefix('reports')->group(function(){
         Route::get('/', 'index')->name('index');
         Route::get('/filter', 'filter')->name('filter');
         Route::get('/download/{type}/{from_date}/{to_date}', 'download')->name('download');
     });
+
     // permissions
     Route::resource('permissions', PermissionController::class)->except(['create', 'edit', 'show']);
+
     // roles
     Route::resource('roles', RoleController::class);
+
     // users
     Route::resource('users', UserController::class)->only(['index', 'update', 'destroy']);
 });
