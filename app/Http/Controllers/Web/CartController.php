@@ -21,7 +21,7 @@ class CartController extends Controller
         $grandQuantity = $carts->sum('quantity');
 
         // render view
-        return view('pages.web.carts.index', compact('carts', 'grandQuantity'));
+        return view('web.carts.index', compact('carts', 'grandQuantity'));
     }
 
     public function store(Request $request, Product $product)
